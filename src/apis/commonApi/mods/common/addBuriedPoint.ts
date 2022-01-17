@@ -2,7 +2,6 @@
  * @desc 添加埋点
  */
 import axios from 'axios';
-export class IQueryParams {}
 
 export function request(bodyParams: defs.commonApi.BuriedPointRequest) {
   return axios({

@@ -2,7 +2,6 @@
  * @desc 新增
  */
 import axios from 'axios';
-export class IQueryParams {}
 
 export function request(bodyParams: defs.productApi.UserProductAddRequest) {
   return axios({

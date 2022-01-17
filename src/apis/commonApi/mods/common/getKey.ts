@@ -2,7 +2,6 @@
  * @desc 生成key
  */
 import axios from 'axios';
-export class IQueryParams {}
 
 export function request() {
   return axios({

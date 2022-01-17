@@ -2,7 +2,6 @@
  * @desc 地区列表
  */
 import axios from 'axios';
-export class IQueryParams {}
 
 export function request() {
   return axios({

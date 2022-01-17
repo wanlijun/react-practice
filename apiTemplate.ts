@@ -1,4 +1,4 @@
-import { CodeGenerator, Interface } from 'pont-engine'
+import { CodeGenerator, Interface, Surrounding } from 'pont-engine'
 
 
 function formatPath(rawPath: string) {
@@ -29,7 +29,13 @@ export default class MyGenerator extends CodeGenerator {
     //}
     const queryParamsType = 'IQueryParams'
     const bodyParams = inter.getBodyParamsCode();
-    const paramsCode = inter.getParamsCode(queryParamsType);
+    const paramsCode = `class ${queryParamsType} {
+      ${inter.parameters
+            .filter(param => param.in === 'query')
+            .map(param => param.toPropertyCode(Surrounding.typeScript, true))
+            .join('')}
+    }
+  `
     const isEmptyParams = paramsCode.replace(/(\n|\s)/g, '') === `class${queryParamsType}{}`;
     let contentType = inter.consumes && inter.consumes.length ? inter.consumes[0] : '';
     contentType = contentType === 'application/json' || !contentType ? '' : contentType
@@ -39,15 +45,15 @@ export default class MyGenerator extends CodeGenerator {
     !isEmptyParams && requestArgs.push(`params: ${queryParamsType}`);
     bodyParams && requestArgs.push(`bodyParams: ${bodyParams}`);
     const requestParams = requestArgs.join(', ');
-    if (path.includes('/api/ctsSaaS/front/common/product/')) {
-      console.log(inter.getRequestParams(), '=====>')
-    }
+   
     return `
     /**
      * @desc ${inter.description}
      */
     import axios from 'axios'
-    export ${inter.getParamsCode(queryParamsType)}
+    ${
+      !isEmptyParams ? `export ${paramsCode}` : ''
+    }
     export function request(${requestParams}) {
       return axios({
         url: \`${path}\`,

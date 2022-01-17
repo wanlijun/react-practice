@@ -2,7 +2,6 @@
  * @desc 登录-密码登录
  */
 import axios from 'axios';
-export class IQueryParams {}
 
 export function request(bodyParams: defs.userApi.UserBaseRequest) {
   return axios({
