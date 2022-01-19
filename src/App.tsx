@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
-import logo from './logo.svg'
-import interceptors from './utils/interceptors'
+import { useEffect, useState } from 'react';
+import logo from './logo.svg';
+import interceptors from './utils/interceptors';
+import 'antd/dist/antd.css';
 import './apis';
 import './App.css'
 
