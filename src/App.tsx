@@ -14,7 +14,10 @@ function App() {
   return (
     <div className="App">
        <Form>
-        <GridLayout number={3} gutter={100}>
+        <GridLayout
+          number={2}
+          gutter={100}
+        >
           <Form.Item name="note" label="Note" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
@@ -31,7 +34,7 @@ function App() {
             <Input />
           </Form.Item>
         </GridLayout>
-    </Form>
+      </Form>
     </div>
   )
 }

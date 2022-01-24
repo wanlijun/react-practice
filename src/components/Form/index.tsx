@@ -1,6 +1,8 @@
 
-import { Form, Input } from 'antd';
-import GridLayout from '../GridLayout';
+import { Form, Input, FormItemProps, InputProps } from 'antd';
+import React from 'react';
+import BaseInput from './BaseInput';
+import GridLayout, { IGridLayout } from '../GridLayout';
 
 
 export enum FormItemType {
@@ -17,45 +19,46 @@ export interface IFormItem {
    */
   type?: FormItemType;
   /**
-   * @description　表单项的key
+   * @description　Form.Item属性
    */
-  name: string;
+  formItemProps: FormItemProps;
   /**
-   * @description　标签
+   * @description　表单组件属性,传递给Input Select的属性
    */
-  label: String;
-   /**
-   * @description　校验规则
-   */
-  rules: any
+  childProps: InputProps
+  
 }
 export interface IBaseForm {
+  gridLayout: IGridLayout;
   config : IFormItem[];
 }
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-const BaseForm = () => {
+const BaseForm: React.FC<IBaseForm> = ({
+  config,
+  gridLayout
+}) => {
   const [form] = Form.useForm();
+  const renderFormItem = () => {
+    return config.map((item) => {
+      switch (item.type) {
+        case FormItemType.INPUT:
+          return (
+            <Form.Item
+             {...item.formItemProps}
+            >
+              <BaseInput {...item.childProps}/>
+            </Form.Item>
+          );
+      }
+    })
+  }
   return (
     <Form>
-      <GridLayout number={3} gutter={35}>
-        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
+      <GridLayout {...gridLayout}>
+        { renderFormItem() }
       </GridLayout>
     </Form>
   )
