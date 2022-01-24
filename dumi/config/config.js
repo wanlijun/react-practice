@@ -10,5 +10,6 @@ export default {
   },
   alias: {
     src: path.resolve(__dirname, '../../', 'src'),
-  }
+  },
+  styles: [`/antd/dist/antd.css`],
 }

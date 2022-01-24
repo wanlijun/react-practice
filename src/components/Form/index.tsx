@@ -1,5 +1,6 @@
 
 import { Form, Input } from 'antd';
+import GridLayout from '../GridLayout';
 
 
 export enum FormItemType {
@@ -35,16 +36,27 @@ const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-const BaseForm = ({config}) => {
+const BaseForm = () => {
   const [form] = Form.useForm();
   return (
     <Form>
-      <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
+      <GridLayout number={3}>
+        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+      </GridLayout>
     </Form>
   )
 }

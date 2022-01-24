@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+import GridLayout from 'src/components/GridLayout'
 import logo from './logo.svg';
 import interceptors from './utils/interceptors';
-import 'antd/dist/antd.css';
 import './apis';
 import './App.css'
 
@@ -12,7 +12,7 @@ function App() {
  
   return (
     <div className="App">
-      <Login />
+      <GridLayout />
     </div>
   )
 }
