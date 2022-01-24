@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import usePluginImport from 'vite-plugin-importer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,5 +17,19 @@ export default defineConfig({
       'src': path.resolve(__dirname, './src')
     }
   },
-  plugins: [react()]
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
+  plugins: [
+    react(),
+    usePluginImport({
+      libraryName: "antd",
+      libraryDirectory: "es",
+      style: true,
+    }),
+  ]
 })

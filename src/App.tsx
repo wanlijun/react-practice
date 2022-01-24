@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Form, Input } from 'antd';
 import GridLayout from 'src/components/GridLayout'
 import logo from './logo.svg';
 import interceptors from './utils/interceptors';
@@ -12,7 +13,25 @@ function App() {
  
   return (
     <div className="App">
-      <GridLayout />
+       <Form>
+        <GridLayout number={3} gutter={100}>
+          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+        </GridLayout>
+    </Form>
     </div>
   )
 }

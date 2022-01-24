@@ -1,5 +1,5 @@
 import path from 'path';
-console.log(path.resolve(__dirname, '../../', 'src/components'), '====>')
+
 export default {
   title: '公共组件',
   resolve: {
@@ -11,5 +11,7 @@ export default {
   alias: {
     src: path.resolve(__dirname, '../../', 'src'),
   },
-  styles: [`/antd/dist/antd.css`],
+  antd: {
+    
+  }
 }

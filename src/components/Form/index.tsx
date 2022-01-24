@@ -40,7 +40,7 @@ const BaseForm = () => {
   const [form] = Form.useForm();
   return (
     <Form>
-      <GridLayout number={3}>
+      <GridLayout number={3} gutter={35}>
         <Form.Item name="note" label="Note" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
