@@ -27,9 +27,11 @@ function App() {
           <Form.Item name="note" label="Note" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
+          <GridLayout.Full>
+            <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+          </GridLayout.Full>
           <Form.Item name="note" label="Note" rules={[{ required: true }]}>
             <Input />
           </Form.Item>

@@ -1,5 +1,6 @@
 
 import React, { useMemo } from 'react';
+import Full from './Full';
 import styles from './index.module.less';
 
 export interface IGridLayout {
@@ -26,18 +27,18 @@ const GridLayout: React.FC<IGridLayout> =  ({ number = 1, children, gutter }) =>
   return (
     <div className={styles.layout} style={gutterStyle}>
       {React.Children.map(children, (child) => {
+        console.log(child, '=====>')
+        const colCss = child.type === Full ? Object.assign({}, colStyle, {width: '100%'}) : colStyle
         return (
           <div
             className={styles.col}
-            style={colStyle}>
+            style={colCss}>
             {child}
           </div>
         )
       })}
     </div>
   )
-};
-// const Full = () => {
-
-// }
+}
+GridLayout.Full = Full;
 export default GridLayout;
