@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, Input } from 'antd';
-import GridLayout from 'src/components/GridLayout'
+import BaseForm, { FormItemType } from 'src/components/BaseForm';
 import logo from './logo.svg';
 import interceptors from './utils/interceptors';
 import './apis';
@@ -10,33 +9,50 @@ import Login from './containers/login'
 interceptors();
 
 function App() {
- 
+  const config = [
+    {
+      type: FormItemType.INPUT,
+      label: '姓名',
+      name: 'name',
+      rules: [
+        {
+          required: true,
+          message: '请输入姓名',
+        }
+      ]
+    },
+    {
+      type: FormItemType.SELECT,
+      label: '用户类型',
+      name: 'userType',
+      rules: [
+        {
+          required: true,
+          message: '请输入用户类型',
+        }
+      ],
+      options: [
+        {
+          label: '企业服务经纪人',
+          value: 'agent'
+        },
+        {
+          label: '企业服务经纪人',
+          value: 'bank'
+        }
+      ]
+    }
+  ]
+  const gridLayout = {
+    number: 2,
+    gutter: 100
+  }
   return (
     <div className="App">
-       <Form>
-        <GridLayout
-          number={2}
-          gutter={100}
-        >
-          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <GridLayout.Full>
-            <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-          </GridLayout.Full>
-          <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-        </GridLayout>
-      </Form>
+       <BaseForm
+        config={config}
+        gridLayout={gridLayout}
+      />
     </div>
   )
 }

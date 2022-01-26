@@ -1,17 +1,18 @@
 
-import { Form, Input, FormItemProps, InputProps } from 'antd';
-import React from 'react';
+import { Form, FormItemProps, InputProps } from 'antd';
+import React, { Children } from 'react';
 import BaseInput from './BaseInput';
+import BaseSelect from './BaseSelect';
 import GridLayout, { IGridLayout } from '../GridLayout';
 
-
+export declare type IGridLayoutConfig = Omit<IGridLayout, 'children'>
 export enum FormItemType {
   INPUT = 'input',
   DATE = 'date',
   SELECT = 'select',
   textarea = 'textarea'
 }
-export interface IFormItem {
+export interface IFormItem  {
   /**
    *
    * @description 类型
@@ -19,17 +20,22 @@ export interface IFormItem {
    */
   type?: FormItemType;
   /**
-   * @description　Form.Item属性
+   * @description 标签名
+   * @default  input
    */
-  formItemProps: FormItemProps;
+  label: string;
   /**
-   * @description　表单组件属性,传递给Input Select的属性
+   * @description 字段名
    */
-  childProps: InputProps
+  name: string;
+  /**
+   * @description 校验规则
+   */
+  rules: any;
   
 }
 export interface IBaseForm {
-  gridLayout: IGridLayout;
+  gridLayout: IGridLayoutConfig;
   config : IFormItem[];
 }
 const layout = {
@@ -47,9 +53,17 @@ const BaseForm: React.FC<IBaseForm> = ({
         case FormItemType.INPUT:
           return (
             <Form.Item
-             {...item.formItemProps}
+             
             >
-              <BaseInput {...item.childProps}/>
+              <BaseInput />
+            </Form.Item>
+          );
+        case FormItemType.SELECT:
+          return (
+            <Form.Item
+             
+            >
+              <BaseSelect/>
             </Form.Item>
           );
       }
