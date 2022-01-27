@@ -36,7 +36,6 @@ export interface ISelectFormItem extends IBaseFormItem  {
   options: Array<{[propName: string]: string}>
   labelKey?: string;
   valueKey?: string;
-  [propName: string]: any;
 }
 export type IFormItem = IInputFormItem|ISelectFormItem
 export interface IBaseForm {

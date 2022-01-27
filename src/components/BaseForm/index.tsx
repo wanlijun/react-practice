@@ -22,21 +22,31 @@ const BaseForm: React.FC<IBaseForm> = ({
   const [form] = Form.useForm();
   const renderFormItem = () => {
     return config.map((item) => {
+      const {
+        label,
+        name,
+        rules,
+        ...remainProps
+      } = item;
       switch (item.type) {
         case FormItemType.INPUT:
           return (
             <Form.Item
-             
+             label={label}
+             name={name}
+             rules={rules}
             >
-              <BaseInput />
+              <BaseInput {...remainProps}/>
             </Form.Item>
           );
         case FormItemType.SELECT:
           return (
             <Form.Item
-             
+              label={label}
+              name={name}
+              rules={rules}
             >
-              <BaseSelect/>
+              <BaseSelect {...remainProps}/>
             </Form.Item>
           );
       }
