@@ -1,5 +1,4 @@
 import { Select, SelectProps } from 'antd';
-import { FormItemType } from '../index';
 
 const BaseSelect: React.FC<SelectProps>  = (props) => {
   return (

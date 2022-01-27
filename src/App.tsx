@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import BaseForm, { FormItemType } from 'src/components/BaseForm';
+import BaseForm from 'src/components/BaseForm';
+import {
+  IFormItem,
+  FormItemType
+} from 'src/components/BaseForm/index.d';
 import logo from './logo.svg';
 import interceptors from './utils/interceptors';
 import './apis';
@@ -9,7 +13,7 @@ import Login from './containers/login'
 interceptors();
 
 function App() {
-  const config = [
+  const config: IFormItem[] = [
     {
       type: FormItemType.INPUT,
       label: '姓名',
@@ -19,8 +23,10 @@ function App() {
           required: true,
           message: '请输入姓名',
         }
-      ]
+      ],
+      options: []
     },
+    // 是否能满足只有SELECT的时候，才能传入options
     {
       type: FormItemType.SELECT,
       label: '用户类型',
