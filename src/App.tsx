@@ -23,8 +23,7 @@ function App() {
           required: true,
           message: '请输入姓名',
         }
-      ],
-      options: []
+      ]
     },
     // 是否能满足只有SELECT的时候，才能传入options
     {
@@ -37,14 +36,24 @@ function App() {
           message: '请输入用户类型',
         }
       ],
+      labelKey: 'name',
+      valueKey: 'id',
+      onSelect: (value:string, options: object) => {
+        console.log(value, options)
+      },
+      renderLabel: (_, label, item) => {
+        return <span>{`${label}(${item.role})`}</span>
+      },
       options: [
         {
-          label: '企业服务经纪人',
-          value: 'agent'
+          name: '企业服务经纪人',
+          id: 1,
+          role: '中介'
         },
         {
-          label: '企业服务经纪人',
-          value: 'bank'
+          name: '银行服务经纪人',
+          id: 2,
+          role: 'bank'
         }
       ]
     }

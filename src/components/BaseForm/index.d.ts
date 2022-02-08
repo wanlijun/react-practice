@@ -1,5 +1,7 @@
 
 import { IGridLayout } from '../GridLayout';
+import { InputProps } from 'antd';
+import {　ISelectProps　} from './BaseSelect';
 export declare type IGridLayoutConfig = Omit<IGridLayout, 'children'>
 export enum FormItemType {
   INPUT = 'input',
@@ -8,12 +10,6 @@ export enum FormItemType {
   textarea = 'textarea'
 }
 export interface IBaseFormItem {
-   /**
-   *
-   * @description 类型
-   * @default  input
-   */
-  type?: FormItemType;
   /**
    * @description 标签名
    * @default  input
@@ -28,16 +24,23 @@ export interface IBaseFormItem {
    */
   rules?: any;
 }
-export interface IInputFormItem extends IBaseFormItem {}
-export interface ISelectFormItem extends IBaseFormItem  {
-  /**
-   * @description 选项
+export interface IInputFormItem extends IBaseFormItem, Omit<InputProps, 'name'> {
+/**
+   *
+   * @description 类型
+   * @default  input
    */
-  options: Array<{[propName: string]: string}>
-  labelKey?: string;
-  valueKey?: string;
+  type: FormItemType.INPUT;
 }
-export type IFormItem = IInputFormItem|ISelectFormItem
+export interface ISelectFormItem extends ISelectProps,IBaseFormItem  {
+  /**
+   *
+   * @description 类型
+   * @default  input
+   */
+  type: FormItemType.SELECT;
+}
+export type IFormItem = IInputFormItem | ISelectFormItem
 export interface IBaseForm {
   gridLayout: IGridLayoutConfig,
   config: Array<IFormItem>

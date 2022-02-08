@@ -1,9 +1,12 @@
 import { Input, InputProps } from 'antd';
-import { FormItemType } from '../index';
 
 const BaseInput: React.FC<InputProps>  = (props) => {
+  const {
+    autoComplete,
+    ...remainProps
+  } = props;
   return (
-    <Input {...props}/>
+    <Input autoComplete={autoComplete || 'off'}  {...remainProps}/>
   )
 }
 export default BaseInput

@@ -1,9 +1,9 @@
 
-import { Form, FormItemProps, InputProps } from 'antd';
-import React, { Children } from 'react';
+import { Form } from 'antd';
+import React from 'react';
 import BaseInput from './BaseInput';
 import BaseSelect from './BaseSelect';
-import GridLayout, { IGridLayout } from '../GridLayout';
+import GridLayout from '../GridLayout';
 import {
   FormItemType,
   IBaseForm
@@ -22,31 +22,40 @@ const BaseForm: React.FC<IBaseForm> = ({
   const [form] = Form.useForm();
   const renderFormItem = () => {
     return config.map((item) => {
-      const {
-        label,
-        name,
-        rules,
-        ...remainProps
-      } = item;
       switch (item.type) {
         case FormItemType.INPUT:
+          const {
+            label: inputLabel,
+            name: inputName,
+            rules: inputRules,
+            ...inputProps
+          } = item;
+         
           return (
             <Form.Item
-             label={label}
-             name={name}
-             rules={rules}
+             key={inputName}
+             label={inputLabel}
+             name={inputName}
+             rules={inputRules}
             >
-              <BaseInput {...remainProps}/>
+              <BaseInput {...inputProps}/>
             </Form.Item>
           );
         case FormItemType.SELECT:
+          const {
+            label: selectLabel,
+            name: selectName,
+            rules: selectRules,
+            ...selectProps
+          } = item;
           return (
             <Form.Item
-              label={label}
-              name={name}
-              rules={rules}
+              key={selectName}
+              label={selectLabel}
+              name={selectName}
+              rules={selectRules}
             >
-              <BaseSelect {...remainProps}/>
+              <BaseSelect {...selectProps}/>
             </Form.Item>
           );
       }
