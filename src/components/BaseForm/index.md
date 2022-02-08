@@ -2,13 +2,13 @@
 ## 基础用法
 ```jsx
 import React from 'react';
-import Form from 'src/components/Form';
+import BaseForm from 'src/components/BaseForm';
 export default function Demo() {
   const config = [
     {
       type: 'input'
     }
   ]
-  return <Form config={config}/>
+  return <BaseForm config={config}/>
 }
 ```

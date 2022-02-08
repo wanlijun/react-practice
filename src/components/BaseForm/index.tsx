@@ -28,6 +28,7 @@ const BaseForm: React.FC<IBaseForm> = ({
             label: inputLabel,
             name: inputName,
             rules: inputRules,
+            placeholder: inputPlaceHolder,
             ...inputProps
           } = item;
          
@@ -38,7 +39,10 @@ const BaseForm: React.FC<IBaseForm> = ({
              name={inputName}
              rules={inputRules}
             >
-              <BaseInput {...inputProps}/>
+              <BaseInput
+                placeholder={inputPlaceHolder || `请输入${inputLabel|| ''}`}
+                {...inputProps}
+              />
             </Form.Item>
           );
         case FormItemType.SELECT:
@@ -46,6 +50,7 @@ const BaseForm: React.FC<IBaseForm> = ({
             label: selectLabel,
             name: selectName,
             rules: selectRules,
+            placeholder: selectPlaceHolder,
             ...selectProps
           } = item;
           return (
@@ -55,7 +60,10 @@ const BaseForm: React.FC<IBaseForm> = ({
               name={selectName}
               rules={selectRules}
             >
-              <BaseSelect {...selectProps}/>
+              <BaseSelect
+                placeholder={selectPlaceHolder || `请选择${selectLabel|| ''}`}
+                {...selectProps}
+              />
             </Form.Item>
           );
       }

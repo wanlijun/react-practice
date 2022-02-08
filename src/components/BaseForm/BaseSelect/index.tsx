@@ -3,22 +3,26 @@ import type { BaseOptionType } from 'rc-select/lib/Select';
 import React from 'react';
 
 const Option = Select.Option;
-/**
- * options的值：
- * ［{label: '测试', value: '11'}］
- * 也可是
- * [{name: '测试', id: '11'}]
- * name和id可以通过labelKey，　valueKey指定
- * 那options的类型zen
- */
 type IValue =  string | number | boolean
 interface IOptionItem {
   [propName: string]: IValue
 }
 export interface ISelectProps<valueType = any > extends SelectProps<valueType, BaseOptionType > {
+  /**
+   * 下拉选项
+   */
   options: IOptionItem[]
+  /**
+   * 指定label的key
+   */
   labelKey?: string;
+  /**
+   * 指定value的key
+   */
   valueKey?: string;
+  /**
+   *　自定义label渲染函数
+   */
   renderLabel?: ( value: IValue, label: IValue, item: IOptionItem ) => string | React.ReactNode
 }
 const BaseSelect: React.FC<ISelectProps>  = (props) => {

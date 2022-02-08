@@ -6,7 +6,10 @@ const BaseInput: React.FC<InputProps>  = (props) => {
     ...remainProps
   } = props;
   return (
-    <Input autoComplete={autoComplete || 'off'}  {...remainProps}/>
+    <Input
+      autoComplete={autoComplete || 'off'}
+      {...remainProps}
+    />
   )
 }
 export default BaseInput
