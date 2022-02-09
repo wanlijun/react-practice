@@ -56,7 +56,18 @@ function App() {
           role: 'bank'
         }
       ]
-    }
+    },
+    {
+      type: FormItemType.DATE,
+      label: '注册时间',
+      name: 'registerDate',
+      rules: [
+        {
+          required: true,
+          message: '请选择注册时间',
+        }
+      ]
+    },
   ]
   const gridLayout = {
     number: 2,

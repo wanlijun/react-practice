@@ -1,5 +1,5 @@
 
-import { Form } from 'antd';
+import { Form, DatePicker } from 'antd';
 import React from 'react';
 import BaseInput from './BaseInput';
 import BaseSelect from './BaseSelect';
@@ -64,6 +64,26 @@ const BaseForm: React.FC<IBaseForm> = ({
                 placeholder={selectPlaceHolder || `请选择${selectLabel|| ''}`}
                 {...selectProps}
               />
+            </Form.Item>
+          );
+        case FormItemType.DATE:
+          const {
+            label: dateLabel,
+            name: dateName,
+            rules: dateRules,
+            ...dateProps
+          } = item;
+          return (
+            <Form.Item
+              key={dateName}
+              label={dateLabel}
+              name={dateName}
+              rules={dateRules}
+            >
+              <DatePicker
+                {...dateProps}
+              >
+              </DatePicker>
             </Form.Item>
           );
       }
