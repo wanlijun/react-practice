@@ -17,7 +17,8 @@ const layout = {
 };
 const BaseForm: React.FC<IBaseForm> = ({
   config,
-  gridLayout
+  gridLayout,
+  formProps
 }) => {
   const [form] = Form.useForm();
   const renderFormItem = () => {
@@ -90,7 +91,7 @@ const BaseForm: React.FC<IBaseForm> = ({
     })
   }
   return (
-    <Form>
+    <Form {...formProps}>
       <GridLayout {...gridLayout}>
         { renderFormItem() }
       </GridLayout>

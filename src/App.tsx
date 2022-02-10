@@ -13,6 +13,10 @@ import Login from './containers/login'
 interceptors();
 
 function App() {
+  const formProps = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  }
   const config: IFormItem[] = [
     {
       type: FormItemType.INPUT,
@@ -76,6 +80,7 @@ function App() {
   return (
     <div className="App">
        <BaseForm
+        formProps={formProps}
         config={config}
         gridLayout={gridLayout}
       />

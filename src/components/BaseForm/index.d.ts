@@ -1,6 +1,6 @@
 
 import { IGridLayout } from '../GridLayout';
-import { InputProps } from 'antd';
+import { InputProps, FormProps } from 'antd';
 import {　ISelectProps　} from './BaseSelect';
 export declare type IGridLayoutConfig = Omit<IGridLayout, 'children'>
 export enum FormItemType {
@@ -50,5 +50,6 @@ export interface NormalFormItem extends IBaseFormItem {
 export type IFormItem = IInputFormItem | ISelectFormItem | NormalFormItem
 export interface IBaseForm {
   gridLayout: IGridLayoutConfig,
-  config: Array<IFormItem>
+  config: Array<IFormItem>,
+  formProps?: FormProps
 }
