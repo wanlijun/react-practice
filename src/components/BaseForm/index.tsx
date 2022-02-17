@@ -3,18 +3,14 @@ import { Form, DatePicker } from 'antd';
 import React from 'react';
 import BaseInput from './BaseInput';
 import BaseSelect from './BaseSelect';
+import BaseDatePicker from './BaseDatePicker';
+import BaseRangeDatePicker from './BaseRangeDatePicker';
 import GridLayout from '../GridLayout';
 import {
   FormItemType,
   IBaseForm
  } from './index.d';
 
-
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
 const BaseForm: React.FC<IBaseForm> = ({
   config,
   gridLayout,
@@ -81,10 +77,30 @@ const BaseForm: React.FC<IBaseForm> = ({
               name={dateName}
               rules={dateRules}
             >
-              <DatePicker
+              <BaseDatePicker
                 {...dateProps}
               >
-              </DatePicker>
+              </BaseDatePicker>
+            </Form.Item>
+          );
+        case FormItemType.DATE_RANGE:
+          const {
+            label: rangeDateLabel,
+            name: rangeDateDateName,
+            rules: rangeDateRules,
+            ...rangeDateProps
+          } = item;
+          return (
+            <Form.Item
+              key={rangeDateDateName}
+              label={rangeDateLabel}
+              name={rangeDateDateName}
+              rules={rangeDateRules}
+            >
+              <BaseRangeDatePicker
+                {...rangeDateProps}
+              >
+              </BaseRangeDatePicker>
             </Form.Item>
           );
       }

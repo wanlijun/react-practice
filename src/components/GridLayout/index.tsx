@@ -28,7 +28,10 @@ const GridLayout: React.FC<IGridLayout> =  ({ number = 1, children, gutter }) =>
     <div className={styles.layout} style={gutterStyle}>
       {React.Children.map(children, (child) => {
         console.log(child, '=====>')
-        const colCss = child.type === Full ? Object.assign({}, colStyle, {width: '100%'}) : colStyle
+        let colCss = colStyle;
+        if (child && child.type) {
+          colCss = child.type === Full ? Object.assign({}, colStyle, {width: '100%'}) : colStyle
+        } 
         return (
           <div
             className={styles.col}

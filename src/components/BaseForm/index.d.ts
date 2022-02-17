@@ -2,6 +2,9 @@
 import { IGridLayout } from '../GridLayout';
 import { InputProps, FormProps } from 'antd';
 import {　ISelectProps　} from './BaseSelect';
+import { IBaseInput } from './BaseInput';
+import { IBaseDatePicker } from './BaseDatePicker';
+// import { IBaseRangeDatePicker } from './BaseRangeDatePicker';
 export declare type IGridLayoutConfig = Omit<IGridLayout, 'children'>
 export enum FormItemType {
   INPUT = 'input',
@@ -44,10 +47,28 @@ export interface ISelectFormItem extends ISelectProps,IBaseFormItem  {
    */
   type: FormItemType.SELECT;
 }
-export interface NormalFormItem extends IBaseFormItem {
-  type: FormItemType.DATE | FormItemType.DATE_RANGE
+export interface IDatePickerFormItem extends IBaseFormItem{
+  /**
+   *
+   * @description 类型
+   * @default  input
+   */
+  type: FormItemType.DATE;
 }
-export type IFormItem = IInputFormItem | ISelectFormItem | NormalFormItem
+export interface IRangeDatePickerFormItem extends IBaseFormItem  {
+  /**
+   *
+   * @description 类型
+   * @default  input
+   */
+  type: FormItemType.DATE_RANGE;
+}
+export type IFormItem = 
+IInputFormItem | 
+ISelectFormItem | 
+IDatePickerFormItem | 
+IRangeDatePickerFormItem;
+
 export interface IBaseForm {
   gridLayout: IGridLayoutConfig,
   config: Array<IFormItem>,

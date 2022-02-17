@@ -1,6 +1,7 @@
 import { Input, InputProps } from 'antd';
 
-const BaseInput: React.FC<InputProps>  = (props) => {
+export　type IBaseInput = InputProps;
+const BaseInput: React.FC<IBaseInput>  = (props) => {
   const {
     autoComplete,
     ...remainProps

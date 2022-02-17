@@ -72,6 +72,17 @@ function App() {
         }
       ]
     },
+    {
+      type: FormItemType.DATE_RANGE,
+      label: '时间范围',
+      name: 'registerRangeDate',
+      rules: [
+        {
+          required: true,
+          message: '请选择时间范围',
+        }
+      ]
+    },
   ]
   const gridLayout = {
     number: 2,
