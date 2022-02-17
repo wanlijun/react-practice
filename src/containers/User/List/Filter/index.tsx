@@ -1,18 +1,9 @@
-import { useEffect, useState } from 'react';
 import BaseForm from 'src/components/BaseForm';
 import {
   IFormItem,
   FormItemType
 } from 'src/components/BaseForm/index.d';
-import logo from './logo.svg';
-import interceptors from './utils/interceptors';
-import './apis';
-import './App.css'
-
-import Login from './containers/login'
-interceptors();
-
-function App() {
+const Filter = () => {
   const formProps = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -98,5 +89,4 @@ function App() {
     </div>
   )
 }
-
-export default App
+export default Filter;

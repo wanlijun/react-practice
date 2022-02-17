@@ -4,7 +4,7 @@ import './index.css';
 import { ConfigProvider } from 'antd';
 import 'moment/dist/locale/zh-cn'
 import zhCN from 'antd/lib/locale/zh_CN';
-import App from './App';
+import App from './containers/App/App';
 ReactDOM.render(
   <React.StrictMode>
      <ConfigProvider locale={zhCN}>
