@@ -20,6 +20,7 @@ const BaseForm = forwardRef<unknown, IBaseForm>(({
   // TODO:如何传自定义类型
   const [form] = Form.useForm<adminApi.UserBaseRequest>();
   const { validateFields } = form
+  
   useImperativeHandle(ref, () => ({
     getValues: () => {
       return new Promise((resolve, reject) => {
@@ -124,6 +125,7 @@ const BaseForm = forwardRef<unknown, IBaseForm>(({
       }
     })
   }
+  
   return (
     <div className={styles.formBox}>
       <Form form={form} {...formProps}>
