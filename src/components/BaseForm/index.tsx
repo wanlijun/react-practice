@@ -1,22 +1,40 @@
-
-import { Form, DatePicker } from 'antd';
-import React from 'react';
+import React, { useImperativeHandle, forwardRef } from 'react';
+import { Form } from 'antd';
+import { defs } from 'src/apis'
 import BaseInput from './BaseInput';
 import BaseSelect from './BaseSelect';
 import BaseDatePicker from './BaseDatePicker';
 import BaseRangeDatePicker from './BaseRangeDatePicker';
 import GridLayout from '../GridLayout';
+import styles from './index.module.less';
 import {
   FormItemType,
   IBaseForm
  } from './index.d';
-
-const BaseForm: React.FC<IBaseForm> = ({
+// TODO:第一个泛型要传什么
+const BaseForm = forwardRef<unknown, IBaseForm>(({
   config,
   gridLayout,
   formProps
-}) => {
-  const [form] = Form.useForm();
+}, ref) => {
+  // TODO:如何传自定义类型
+  const [form] = Form.useForm<adminApi.UserBaseRequest>();
+  const { validateFields } = form
+  useImperativeHandle(ref, () => ({
+    getValues: () => {
+      return new Promise((resolve, reject) => {
+        validateFields()
+          .then((values) => {
+            resolve(values)
+          }).catch(errorInfo => {
+            reject(errorInfo)
+          })
+      })
+    },
+    getForm: () => {
+      return form;
+    }
+  }));
   const renderFormItem = () => {
     return config.map((item) => {
       switch (item.type) {
@@ -107,11 +125,14 @@ const BaseForm: React.FC<IBaseForm> = ({
     })
   }
   return (
-    <Form {...formProps}>
-      <GridLayout {...gridLayout}>
-        { renderFormItem() }
-      </GridLayout>
-    </Form>
+    <div className={styles.formBox}>
+      <Form form={form} {...formProps}>
+        <GridLayout {...gridLayout}>
+          { renderFormItem() }
+        </GridLayout>
+      </Form>
+    </div>
+    
   )
-}
+})
 export default BaseForm;

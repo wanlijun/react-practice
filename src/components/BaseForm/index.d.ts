@@ -1,9 +1,10 @@
 
 import { IGridLayout } from '../GridLayout';
-import { InputProps, FormProps } from 'antd';
+import { InputProps, FormProps, FormInstance } from 'antd';
 import {　ISelectProps　} from './BaseSelect';
 import { IBaseInput } from './BaseInput';
 import { IBaseDatePicker } from './BaseDatePicker';
+import React from 'react';
 // import { IBaseRangeDatePicker } from './BaseRangeDatePicker';
 export declare type IGridLayoutConfig = Omit<IGridLayout, 'children'>
 export enum FormItemType {
@@ -72,5 +73,10 @@ IRangeDatePickerFormItem;
 export interface IBaseForm {
   gridLayout: IGridLayoutConfig,
   config: Array<IFormItem>,
-  formProps?: FormProps
+  formProps?: FormProps,
+  ref?: React.ReactElement
+}
+export interface IBaseFormExports<formValueType> {
+  getValues: () => Promise<formValueType>,
+  getForm: () => FormInstance<formValueType>
 }

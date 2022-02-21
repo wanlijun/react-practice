@@ -1,16 +1,8 @@
 {
   "origins": [
     {
-      "name": "commonApi",
-      "originUrl": "http://54.223.65.140:28082/credit-advices-saas-web/v2/api-docs?group=%E5%85%AC%E5%85%B1%E5%BA%93"
-    },
-    {
-      "name": "userApi",
-      "originUrl": "http://54.223.65.140:28082/credit-advices-saas-web/v2/api-docs?group=%E5%89%8D%E5%8F%B0-%E7%94%A8%E6%88%B7"
-    },
-    {
-      "name": "productApi",
-      "originUrl": "http://54.223.65.140:28082/credit-advices-saas-web/v2/api-docs?group=%E5%89%8D%E5%8F%B0-%E6%88%91%E7%9A%84%E4%BA%A7%E5%93%81"
+      "name": "adminApi",
+      "originUrl": "http://54.223.65.140:28082/credit-advices-saas-web/v2/api-docs?group=%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86"
     }
   ],
   "outDir": "./src/apis",

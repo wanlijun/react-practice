@@ -1,6 +1,8 @@
-.App {
-  width: 1200px;
-  margin: 50px auto;
-  padding: 10px;
-  border: 1px solid #eee;
+.header {
+  color: #fff;
+}
+.content {
+  margin: 16px;
+  background: #fff;
+  padding: 16px;
 }

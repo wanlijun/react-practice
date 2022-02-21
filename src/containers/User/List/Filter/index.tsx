@@ -80,7 +80,7 @@ const Filter = () => {
     gutter: 100
   }
   return (
-    <div className="App">
+    <div>
        <BaseForm
         formProps={formProps}
         config={config}
