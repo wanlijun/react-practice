@@ -24,59 +24,57 @@ export interface IBaseFormItem {
    */
   label?: string;
   /**
-   * @description 字段名
-   */
-  name: string;
-  /**
    * @description 校验规则
    */
   rules?: any;
 }
-export interface IInputFormItem extends IBaseFormItem, Omit<InputProps, 'name'> {
+export interface IInputFormItem<Values> extends IBaseFormItem, Omit<InputProps, 'name'> {
 /**
    *
    * @description 类型
    * @default  input
    */
   type: FormItemType.INPUT;
+  name: keyof Values;
 }
-export interface ISelectFormItem extends ISelectProps,IBaseFormItem  {
+export interface ISelectFormItem<Values> extends ISelectProps,IBaseFormItem  {
   /**
    *
    * @description 类型
    * @default  input
    */
   type: FormItemType.SELECT;
+  name: keyof Values;
 }
-export interface IDatePickerFormItem extends IBaseFormItem{
+export interface IDatePickerFormItem<Values> extends IBaseFormItem{
   /**
    *
    * @description 类型
    * @default  input
    */
   type: FormItemType.DATE;
+  name: keyof Values;
 }
-export interface IRangeDatePickerFormItem extends IBaseFormItem  {
+export interface IRangeDatePickerFormItem<Values> extends IBaseFormItem  {
   /**
    *
    * @description 类型
    * @default  input
    */
   type: FormItemType.DATE_RANGE;
+  name: keyof Values;
 }
-export type IFormItem = 
-IInputFormItem | 
-ISelectFormItem | 
-IDatePickerFormItem | 
-IRangeDatePickerFormItem;
+export type IFormItem<Values> = 
+IInputFormItem<Values> | 
+ISelectFormItem<Values> | 
+IDatePickerFormItem<Values> | 
+IRangeDatePickerFormItem<Values>;
 
-export interface IBaseForm {
+export interface IBaseFormProps<Values> {
   gridLayout: IGridLayoutConfig,
-  config: Array<IFormItem>,
+  config: Array<IFormItem<Values>>,
   formProps?: FormProps,
-  ref?: React.ReactElement
 }
-export interface IBaseFormExports<formValueType> {
-  getValues: () => Promise<formValueType>,
-  getForm: () => FormInstance<formValueType>
+export interface IBaseFormHandles<Values> {
+  form: FormInstance<Values>,
 }

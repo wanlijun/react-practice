@@ -9,32 +9,18 @@ import GridLayout from '../GridLayout';
 import styles from './index.module.less';
 import {
   FormItemType,
-  IBaseForm
+  IBaseFormProps,
+  IBaseFormHandles
  } from './index.d';
 // TODO:第一个泛型要传什么
-const BaseForm = forwardRef<unknown, IBaseForm>(({
+function BaseForm<Values> ({
   config,
   gridLayout,
   formProps
-}, ref) => {
-  // TODO:如何传自定义类型
-  const [form] = Form.useForm<adminApi.UserBaseRequest>();
-  const { validateFields } = form
-  
+}:IBaseFormProps  , ref: React.Ref<IBaseFormHandles<Values>>) {
+  const [form] = Form.useForm<Values>(); 
   useImperativeHandle(ref, () => ({
-    getValues: () => {
-      return new Promise((resolve, reject) => {
-        validateFields()
-          .then((values) => {
-            resolve(values)
-          }).catch(errorInfo => {
-            reject(errorInfo)
-          })
-      })
-    },
-    getForm: () => {
-      return form;
-    }
+    form,
   }));
   const renderFormItem = () => {
     return config.map((item) => {
@@ -136,5 +122,5 @@ const BaseForm = forwardRef<unknown, IBaseForm>(({
     </div>
     
   )
-})
-export default BaseForm;
+}
+export default forwardRef(BaseForm);

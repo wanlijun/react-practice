@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import React, { useMemo, isValidElement } from 'react';
 import Full from './Full';
 import styles from './index.module.less';
 
@@ -16,7 +16,7 @@ export interface IGridLayout {
   gutter?: number;
   children: React.ReactNode;
 };
-const GridLayout: React.FC<IGridLayout> =  ({ number = 1, children, gutter }) => {
+const GridLayout: React.FC<IGridLayout> & { Full: typeof Full } =  ({ number = 1, children, gutter }) => {
   const width = useMemo(() => 100 / number, [number]);
   const gutterStyle = gutter ? { marginLeft: -gutter + 'px', marginRight: -gutter + 'px' } : undefined;
   const colStyle = gutter ?
@@ -27,9 +27,8 @@ const GridLayout: React.FC<IGridLayout> =  ({ number = 1, children, gutter }) =>
   return (
     <div className={styles.layout} style={gutterStyle}>
       {React.Children.map(children, (child) => {
-        console.log(child, '=====>')
         let colCss = colStyle;
-        if (child && child.type) {
+        if (isValidElement(child)) {
           colCss = child.type === Full ? Object.assign({}, colStyle, {width: '100%'}) : colStyle
         } 
         return (

@@ -3,7 +3,7 @@ import styles from './index.module.less';
 import {
   IFormItem,
   FormItemType,
-  IBaseFormExports
+  IBaseFormHandles
 } from 'src/components/BaseForm/index.d';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
@@ -15,10 +15,11 @@ function login() {
   const formProps = {
     wrapperCol: { span: 24 },
   }
-  const config: IFormItem[] = [
+  // nice:可校验定义的字段是否和后端定义的字段是否保持一致
+  const config: IFormItem<adminApi.UserBaseRequest>[] = [
     {
       type: FormItemType.INPUT,
-      name: 'name',
+      name: 'phone',
       prefix: <UserOutlined className="site-form-item-icon" />,
       size: 'large',
       rules: [
@@ -30,7 +31,7 @@ function login() {
     },
     {
       type: FormItemType.INPUT,
-      name: 'userType',
+      name: 'password',
       prefix: <LockOutlined />,
       size: 'large',
       rules: [
@@ -45,11 +46,10 @@ function login() {
     number: 1,
     gutter: 0
   }
-  const formRef = useRef<IBaseFormExports<adminApi.UserBaseRequest>>(null);
+  const formRef = useRef<IBaseFormHandles<adminApi.UserBaseRequest>>(null);
   const { loading, run } = useRequest(() => {
-      return formRef!.current!.getValues()
+      return formRef!.current!.form.validateFields()
         .then((value) => {
-           // TODO:怎么将表单的字段值和接口定义的类型关联起来
           adminApi.admin.loginByPwd.request(value)
         })
     },
