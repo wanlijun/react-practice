@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -22,9 +23,28 @@ export function activate(context: vscode.ExtensionContext) {
 			'collect',
 			'Form Collect',
 			vscode.ViewColumn.One, //显示第一个面板?
-			{}
+			{
+				enableScripts: true
+			}
 		)
-		panel.webview.html = getWebviewContent();
+		panel.webview.onDidReceiveMessage(
+			message => {
+				switch (message.command) {
+					case 'save':
+						console.log(message.data)
+						vscode.window.showWarningMessage(message.data.name);
+						return;
+				}
+			},
+			undefined,
+			context.subscriptions
+		);
+
+		const onDiskPath = vscode.Uri.file(
+			path.join(context.extensionPath, 'source/assets', 'index.218a402d.js')
+		);
+		const jsSrc = panel.webview.asWebviewUri(onDiskPath);
+		panel.webview.html = getWebviewContent(jsSrc);
 	});
 	context.subscriptions.push(disposable);
 }
@@ -32,16 +52,20 @@ export function activate(context: vscode.ExtensionContext) {
 // this method is called when your extension is deactivated
 export function deactivate() {}
 
-function getWebviewContent() {
+function getWebviewContent(jsSrc:any) {
 	return `<!DOCTYPE html>
 	<html lang="en">
-	<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>Cat Coding</title>
-	</head>
-	<body>
-		Hello caicai!
-	</body>
+		<head>
+			<meta charset="UTF-8" />
+			<link rel="icon" type="image/svg+xml" href="/assets/favicon.17e50649.svg" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<title>Vite App</title>
+			<script type="module" crossorigin src="${jsSrc}"></script>
+			<link rel="stylesheet" href="/assets/index.cd9c0392.css">
+		</head>
+		<body>
+			<div id="root">no script</div>
+			
+		</body>
 	</html>`
 }
