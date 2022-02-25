@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
 		);
 
 		const onDiskPath = vscode.Uri.file(
-			path.join(context.extensionPath, 'source/assets', 'index.218a402d.js')
+			path.join(context.extensionPath, 'source/assets', 'index.a34370a7.js')
 		);
 		const jsSrc = panel.webview.asWebviewUri(onDiskPath);
 		panel.webview.html = getWebviewContent(jsSrc);

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+const vscode = acquireVsCodeApi();
 declare const acquireVsCodeApi:any;
 function App() {
   const [name, setName] = useState('')
   const save = () => {
-    const vscode = acquireVsCodeApi();
     vscode.postMessage({
       command: 'save',
       data: {
