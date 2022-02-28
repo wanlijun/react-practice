@@ -2,10 +2,11 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as path from 'path';
+const nodePlop = require('node-plop');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
 	
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
@@ -14,11 +15,13 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
+	const { action } = await generateCode();
 	let disposable = vscode.commands.registerCommand('admin-generate-code.helloWorld', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 		// vscode.window.showInformationMessage('Hello World from admin-generate-code!');
 		// vscode.commands.executeCommand('editor.action.addCommentLine')
+		
 		const panel = vscode.window.createWebviewPanel(
 			'collect',
 			'Form Collect',
@@ -31,8 +34,12 @@ export function activate(context: vscode.ExtensionContext) {
 			message => {
 				switch (message.command) {
 					case 'save':
-						console.log(message.data)
-						vscode.window.showWarningMessage(message.data.name);
+						vscode.window.showInformationMessage(message.data.name);
+						action.runActions({name: message.data.name}).then((result:any) => {
+							vscode.window.showWarningMessage(message.data.name);
+						}).catch((error: any) => {
+							console.log(error, '====???')
+						});
 						return;
 				}
 			},
@@ -68,4 +75,17 @@ function getWebviewContent(jsSrc:any) {
 			
 		</body>
 	</html>`
+}
+async function  generateCode() {
+	const plop = await nodePlop('', { destBasePath: 'src'});
+	const action = plop.setGenerator('create-table', {
+		description: 'create a table',
+		actions: [{
+			type: 'add',
+			path: path.resolve(__dirname, '../src/{{name}}.jsx') ,
+			templateFile: path.resolve(__dirname, '../src/plop-templates/controller.jsx') 
+		}],
+		prompts: []
+	});
+	return { action };
 }
