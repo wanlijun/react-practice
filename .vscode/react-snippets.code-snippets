@@ -24,5 +24,19 @@
 			"export default ${1:name}",
 		],
 		"description": "react　组件"
+	},
+	"rcomts": {
+		"prefix": "rcomts",
+		"body": [
+			"import React from 'react';",
+			"",
+			"interface ${2:IProps} {}",
+			"",
+			"const ${1:name}: React.FC<${2:IProps}> = ()=> {",
+			" return <div></div>",
+			"}",
+			"export default ${1:name}",
+		],
+		"description": "react　组件"
 	}
 }

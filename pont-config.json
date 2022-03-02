@@ -3,6 +3,10 @@
     {
       "name": "adminApi",
       "originUrl": "http://54.223.65.140:28082/credit-advices-saas-web/v2/api-docs?group=%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86"
+    },
+    {
+      "name": "commonApi",
+      "originUrl": "http://54.223.65.140:28082/credit-advices-saas-web/v2/api-docs?group=%E5%85%AC%E5%85%B1%E5%BA%93"
     }
   ],
   "outDir": "./src/apis",

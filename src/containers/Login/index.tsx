@@ -1,4 +1,4 @@
-import BaseForm from 'src/components/BaseForm';
+// import BaseForm from 'src/components/BaseForm';
 import styles from './index.module.less';
 import {
   IFormItem,
@@ -66,12 +66,12 @@ function login() {
   return (
     <div className={styles.logoBox}>
       <h2　className={styles.title}>管理后台</h2>
-      <BaseForm
+      {/* <BaseForm
         ref={formRef}
         formProps={formProps}
         config={config}
         gridLayout={gridLayout}
-        />
+        /> */}
       <Button
         size="large"
         className={styles.submitButton}
