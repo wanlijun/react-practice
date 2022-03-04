@@ -1,92 +1,111 @@
-import BaseForm from 'src/components/BaseForm';
+import { Form, FormInstance } from 'antd';
+import {
+  BaseInput,
+  CityCascader,
+  BaseSelect,
+  BaseRangeDatePicker
+} from 'src/components/BaseForm'
 import {
   IFormItem,
   FormItemType
 } from 'src/components/BaseForm/index.d';
+import GridLayout from 'src/components/GridLayout';
+
+const USER_TYPE_OPTIONS = [
+  {
+    label: '银行客户经理',
+    value: 'BANK_CUSTOMER'
+  },
+  {
+    label: '企业服务经纪人',
+    value: 'ENTERPRISE_SERVICE'
+  }
+]
+const USER_STATUS_OPTIONS = [
+  {
+    label: '是',
+    value: 'ENABLE'
+  },
+  {
+    label: '否',
+    value: 'DISABLE'
+  }
+]
+const INSIDERS_OPTIONS = [
+  {
+    label: '是',
+    value: true
+  },
+  {
+    label: '否',
+    value: false
+  }
+]
+const layOut = {
+  labelCol: {
+    span: 6
+  },
+  wrapperCol: {
+    span: 18
+  }
+}
 const Filter = () => {
-  const formProps = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  }
-  const config: IFormItem[] = [
-    {
-      type: FormItemType.INPUT,
-      label: '姓名',
-      name: 'name',
-      rules: [
-        {
-          required: true,
-          message: '请输入姓名',
-        }
-      ]
-    },
-    // 是否能满足只有SELECT的时候，才能传入options
-    {
-      type: FormItemType.SELECT,
-      label: '用户类型',
-      name: 'userType',
-      rules: [
-        {
-          required: true,
-          message: '请输入用户类型',
-        }
-      ],
-      labelKey: 'name',
-      valueKey: 'id',
-      onSelect: (value:string, options: object) => {
-        console.log(value, options)
-      },
-      renderLabel: (_, label, item) => {
-        return <span>{`${label}(${item.role})`}</span>
-      },
-      options: [
-        {
-          name: '企业服务经纪人',
-          id: 1,
-          role: '中介'
-        },
-        {
-          name: '银行服务经纪人',
-          id: 2,
-          role: 'bank'
-        }
-      ]
-    },
-    {
-      type: FormItemType.DATE,
-      label: '注册时间',
-      name: 'registerDate',
-      rules: [
-        {
-          required: true,
-          message: '请选择注册时间',
-        }
-      ]
-    },
-    {
-      type: FormItemType.DATE_RANGE,
-      label: '时间范围',
-      name: 'registerRangeDate',
-      rules: [
-        {
-          required: true,
-          message: '请选择时间范围',
-        }
-      ]
-    },
-  ]
-  const gridLayout = {
-    number: 2,
-    gutter: 100
-  }
+  const [form] = Form.useForm<API.adminApi.userManage.getUserPage.Params>();
   return (
-    <div>
-       <BaseForm
-        formProps={formProps}
-        config={config}
-        gridLayout={gridLayout}
-      />
-    </div>
+    <Form form={form} {...layOut}>
+      <GridLayout
+        number={4}>
+        <Form.Item
+          name="name"
+          label="姓名"
+          >
+          <BaseInput
+            placeholder="请输入姓名"/>
+        </Form.Item>
+        <Form.Item
+          name="phone"
+          label="手机号"
+          >
+          <BaseInput
+             placeholder="请输入手机号"/>
+        </Form.Item>
+        <Form.Item
+          name="province"
+          label="省市"
+          >
+          <CityCascader />
+        </Form.Item>
+        <Form.Item
+          name="type"
+          label="用户类型">
+          <BaseSelect
+            hasAll
+            options={USER_TYPE_OPTIONS}
+          />
+        </Form.Item>
+        <Form.Item
+          name="insiders"
+          label="是否内部人员">
+          <BaseSelect
+            hasAll
+            options={INSIDERS_OPTIONS}
+          />
+        </Form.Item>
+        <Form.Item
+          name="status"
+          label="账号状态">
+          <BaseSelect
+            hasAll
+            options={USER_STATUS_OPTIONS}
+          />
+        </Form.Item>
+        <Form.Item
+          name="regTime"
+          label="注册时间">
+          <BaseRangeDatePicker/>
+        </Form.Item>
+      </GridLayout>
+    </Form>
   )
 }
 export default Filter;

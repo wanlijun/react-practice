@@ -20,6 +20,10 @@ export interface ISelectProps<valueType = any > extends SelectProps<valueType, B
    * 指定value的key
    */
   valueKey?: string;
+   /**
+   * 是否自动注入全部选项
+   */
+  hasAll?: Boolean,
   /**
    *　自定义label渲染函数
    */
@@ -28,15 +32,25 @@ export interface ISelectProps<valueType = any > extends SelectProps<valueType, B
 const BaseSelect: React.FC<ISelectProps>  = (props) => {
   const {
     options,
+    hasAll = false,
     labelKey = 'label',
     valueKey = 'value',
     renderLabel,
+    placeholder = '请选择',
     ...remainProps
   } = props;
+  const mergeOptions = options.slice()
+  if(hasAll) {
+    mergeOptions.splice(0, 0 , {[labelKey]: '全部', [valueKey]: ''})
+  }
   return (
-    <Select {...remainProps} >
+    <Select
+      placeholder={placeholder}
+      defaultValue={hasAll ? '' : undefined}
+      {...remainProps}
+    >
       {
-        options.map((item, idx) => (
+        mergeOptions.map((item, idx) => (
           <Option
             key={idx}
             value={item[valueKey]}
